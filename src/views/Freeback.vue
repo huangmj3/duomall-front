@@ -8,7 +8,7 @@
         <div class="freeback-box">
           <div class="freeback-title">
             <h1>意见反馈</h1>
-            <h2>感谢你的反馈，我们会积极改善，做出更好的服务的</h2>
+            <h2>感谢你的反馈，我们会积极改善，做出更好的服务的!</h2>
           </div>
           <div class="freeback-content">
             <div class="freeback-form">
