@@ -82,8 +82,6 @@
 import Search from '@/views/Search';
 import GoodsListNav from '@/views/nav/GoodsListNav';
 import GoodsClassNav from '@/views/nav/GoodsClassNav';
-import store from '@/vuex/store';
-import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'GoodsList',
   beforeRouteEnter (to, from, next) {
@@ -277,17 +275,18 @@ export default {
     };
   },
   computed: {
-    ...mapState(['isLoading'])
+    isLoading(){
+      return this.$store.state.isLoading;
+    }
   },
   methods: {
-    ...mapMutations(['SET_GOODS_ORDER_BY']),
     orderBy (data, index) {
       console.log(data);
       this.icon = [ 'arrow-down-a', 'arrow-down-a', 'arrow-down-a' ];
       this.isAction = [ false, false, false ];
       this.isAction[index] = true;
       this.icon[index] = 'arrow-up-a';
-      this.SET_GOODS_ORDER_BY(data);
+      this.$store.commit('SET_GOODS_ORDER_BY',data);
     }
   },
   created () {
@@ -306,8 +305,7 @@ export default {
     Search,
     GoodsListNav,
     GoodsClassNav
-  },
-  store
+  }
 };
 </script>
 

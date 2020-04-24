@@ -137,8 +137,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
-import { mapState } from 'vuex';
 export default {
   name: 'HomeNav',
   data () {
@@ -257,7 +255,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(['marketing'])
+    marketing(){
+      console.log("这里是计算属性")
+      console.log(this.$store.state)
+      return this.$store.state.marketing;
+    }
   },
   methods: {
     showDetail (index) {
@@ -282,8 +284,7 @@ export default {
       this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
     this.$refs.itemPanel1.style.top = this.$refs.navSide.offsetTop + 'px';
     this.$refs.itemPanel2.style.top = this.$refs.navSide.offsetTop + 'px';
-  },
-  store
+  }
 };
 </script>
 

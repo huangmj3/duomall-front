@@ -66,8 +66,6 @@
 <script>
 import Search from '@/views/Search';
 import GoodsListNav from '@/views/nav/GoodsListNav';
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'ShoppingCart',
   data() {
@@ -146,8 +144,7 @@ export default {
   components: {
     Search,
     GoodsListNav
-  },
-  store
+  }
 };
 </script>
 

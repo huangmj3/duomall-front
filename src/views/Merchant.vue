@@ -30,12 +30,10 @@
 
 <script>
 import ShopHeader from '@/views/header/ShopHeader';
-import store from '@/vuex/store';
-import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Merchant',
   created () {
-    // this.loadGoodsList(); 
+    // this.loadGoodsList();
   },
   data() {
     return {
@@ -173,8 +171,7 @@ export default {
   },
   components: {
     ShopHeader
-  },
-  store
+  }
 };
 </script>
 

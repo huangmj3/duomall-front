@@ -95,8 +95,6 @@
 
 <script>
 import ShowProductWarranty from '@/views/goods/ShowProductWarranty';
-import store from '@/vuex/store';
-import { mapState } from 'vuex';
 export default {
   name: 'ShowGoodsDetail',
   data () {
@@ -231,9 +229,6 @@ export default {
       }
     };
   },
-  // computed: {
-  //  ...mapState(['goodsInfo'])
-  // },
   methods: {
     changeHeight () {
       let heightCss = window.getComputedStyle(this.$refs.itemIntroGoods).height;
@@ -258,8 +253,7 @@ export default {
   },
   components: {
     ShowProductWarranty
-  },
-  store
+  }
 };
 </script>
 

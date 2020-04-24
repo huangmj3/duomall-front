@@ -2,7 +2,7 @@
   <div class="container">
     <Search></Search>
     <HomeNav></HomeNav>
-    <!-- 商品显示区域 -->
+     商品显示区域
     <div class="content">
       <!-- 秒杀 -->
       <div class="seckill">
@@ -17,11 +17,11 @@
           </div>
           <div class="count-down">
             <span class="count-down-text">当前场次</span>
-            <span class="count-down-num count-down-hour">{{ seckillsHours }}</span>
+            <span class="count-down-num count-down-hour">{{$store.getters.seckillsHours }}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-minute">{{ seckillsMinutes }}</span>
+            <span class="count-down-num count-down-minute">{{$store.getters.seckillsMinutes }}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-seconds">{{ seckillsSeconds }}</span>
+            <span class="count-down-num count-down-seconds">{{$store.getters.seckillsSeconds }}</span>
             <span class="count-down-text">后结束抢购</span>
           </div>
         </div>
@@ -124,19 +124,17 @@
 </template>
 
 <script>
-import Search from '@/views/Search';
-import HomeNav from '@/views/nav/HomeNav';
-import store from '@/vuex/store';
-import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
+import Search from '../views/Search';
+import HomeNav from '../views/nav/HomeNav';
 export default {
   name: 'Index',
   created () {
-    this.loadCarouselItems();
+    this.$store.dispatch('loadCarouselItems');
   },
   mounted () {
     const father = this;
     this.setIntervalObj = setInterval(function () {
-      father.REDUCE_SECKILLS_TIME();
+      father.$store.commit('REDUCE_SECKILLS_TIME');
     }, 1000);
   },
   data () {
@@ -312,12 +310,30 @@ export default {
   },
   methods: {
     // ...mapActions(['loadSeckillsInfo', 'loadCarouselItems', 'loadComputer', 'loadEat', 'loadShoppingCart']),
-    ...mapActions(['loadCarouselItems']),
-    ...mapMutations(['REDUCE_SECKILLS_TIME'])
+    // ...mapActions(['loadCarouselItems']),
+    // ...mapMutations(['REDUCE_SECKILLS_TIME'])
   },
   computed: {
     // ...mapState([ 'seckills', 'computer', 'eat' ]),
-    ...mapGetters([ 'seckillsHours', 'seckillsMinutes', 'seckillsSeconds' ])
+    // seckills(){
+    //   return this.$store.state.seckills;
+    // },
+    // computer(){
+    //   return this.$store.state.computer;
+    // },
+    // eat(){
+    //   return this.$store.state.eat;
+    // },
+    seckillsHours(){
+      return this.$store.getters.seckillsHours()
+    },
+    seckillsMinutes(){
+      return this.$store.getters.seckillsMinutes()
+    },
+    seckillsSeconds(){
+      return this.$store.getters.seckillSeconds()
+    }
+    // ...mapGetters([ 'seckillsHours', 'seckillsMinutes', 'seckillsSeconds' ])
   },
   components: {
     Search,
@@ -325,8 +341,7 @@ export default {
   },
   destroyed () {
     clearInterval(this.setIntervalObj);
-  },
-  store
+  }
 };
 </script>
 

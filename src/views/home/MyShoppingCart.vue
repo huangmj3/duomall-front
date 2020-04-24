@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'MyShoppingCart',
   data () {
@@ -62,18 +60,18 @@ export default {
     };
   },
   created () {
-    this.loadShoppingCart();
+    // this.loadShoppingCart();
   },
   computed: {
-    ...mapState(['shoppingCart'])
+    shoppingCart(){
+      return this.$store.state.shoppingCart;
+    }
   },
   methods: {
-    ...mapActions(['loadShoppingCart']),
     goTo () {
       this.$router.push('/order');
     }
-  },
-  store
+  }
 };
 </script>
 

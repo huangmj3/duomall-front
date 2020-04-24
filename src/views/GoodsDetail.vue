@@ -26,8 +26,6 @@ import GoodsDetailNav from '@/views/nav/GoodsDetailNav';
 import ShopHeader from '@/views/header/ShopHeader';
 import ShowGoods from '@/views/goods/ShowGoods';
 import ShowGoodsDetail from '@/views/goods/ShowGoodsDetail';
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'GoodsDetail',
   beforeRouteEnter (to, from, next) {
@@ -46,7 +44,9 @@ export default {
     // ...mapActions(['loadGoodsInfo'])
   },
   computed: {
-    ...mapState(['isLoading'])
+    isloading(){
+      return this.$store.state.isloading;
+    }
   },
   components: {
     Search,
@@ -54,8 +54,7 @@ export default {
     GoodsDetailNav,
     ShowGoods,
     ShowGoodsDetail
-  },
-  store
+  }
 };
 </script>
 

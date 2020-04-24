@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 import Distpicker from 'v-distpicker';
 export default {
   name: 'MyAddress',
@@ -140,8 +138,7 @@ export default {
   },
   components: {
     Distpicker
-  },
-  store
+  }
 };
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="box">
     <div class="nav">
+      <!--  定位信息  -->
       <ul class="location">
         <li>
           <Dropdown  placement="bottom-start">
@@ -18,13 +19,14 @@
         </li>
       </ul>
       <ul class="detail">
-        <li class="first" v-show="userId == ''">
-          你好，请<router-link to="/login">登录 <Icon type="person"></Icon></router-link> |<span class="text-color-red"><router-link to="/regist">免费注册 <Icon type="person-add"></Icon></router-link></span>
+        <button @click=""></button>
+        <li class="first" v-show="username === ''">
+        你好，请<router-link to="/login">登录 <Icon type="person"></Icon></router-link> | <span class="text-color-red"><router-link to="/regist">免费注册 <Icon type="person-add"></Icon></router-link></span>
         </li>
-        <li v-show="userId != ''">
+        <li v-show="username !== ''">
           <Dropdown>
             <p class="username-p">
-              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{userId}}</span>
+              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{username}}</span>
             </p>
             <DropdownMenu slot="list">
                 <div class="my-page">
@@ -96,12 +98,10 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'M-Header',
   created () {
-    this.isLogin();
+    this.$store.dispatch('isLogin');
   },
   data () {
     return {
@@ -125,10 +125,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userId'])
+    username(){
+      return this.$store.state.userInfo.username;
+    },
   },
   methods: {
-    ...mapActions(['signOut', 'isLogin']),
     changeCity (city) {
       this.city = city;
     },
@@ -139,12 +140,14 @@ export default {
       this.$router.push('/home');
     },
     signOutFun () {
-      this.signOut();
+      this.$store.dispatch('signOut');
       this.$router.push('/');
+    },
+    test(){
+      console.log("1111")
+      this.$store.dispatch('isLogin');
     }
-  },
-  store
-};
+  }};
 </script>
 
 <style scoped>

@@ -95,8 +95,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'ShowGoods',
   data () {
@@ -174,7 +172,10 @@ export default {
     };
   },
   computed: {
-    // ...mapState(['goodsInfo']),
+    goodsInfo(){
+      return this.$store.state.goodsInfo;
+    },
+
     hirePurchase () {
       const three = this.price * this.count / 3;
       const sex = this.price * this.count / 6;
@@ -205,7 +206,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addShoppingCart']),
     select (index1, index2) {
       this.selectBoxIndex = index1 * 3 + index2;
       this.price = this.goodsInfo.setMeal[index1][index2].price;
@@ -247,8 +247,7 @@ export default {
     setTimeout(() => {
       father.price = father.goodsInfo.setMeal[0][0].price || 0;
     }, 300);
-  },
-  store
+  }
 };
 </script>
 

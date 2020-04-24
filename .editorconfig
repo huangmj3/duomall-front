@@ -1,0 +1,32 @@
+# EditorConfig is awesome: http://EditorConfig.org
+# top-most EditorConfig file
+# 最顶层的配置文件
+root = true
+# Unix-style newlines with a newline ending every file
+# 行末应该采用什么符号来进行换行
+[*]
+end_of_line = lf
+# 文件以空白行结尾
+insert_final_newline = true
+# Matches multiple files with brace expansion notation
+# Set default charset
+# 设置默认的编码格式
+[*]
+charset = utf-8
+# 4 space indentation
+[*.{js,html}]
+# 缩进样式是 tab  还是 space
+indent_style = space
+# 每次缩进相当于多少列
+indent_size = 2
+# 去除代码行末的任意空白字符
+trim_trailing_whitespace = true
+# Indentation override for all JS under lib directory
+[*.scss]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2

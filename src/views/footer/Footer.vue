@@ -1,3 +1,4 @@
+<!--界面底部组件-->
 <template>
   <div>
     <footer class="footer">
@@ -20,7 +21,9 @@
           <span class="footer-icon-text">天天低价，畅选无忧</span>
         </div>
       </div>
+
       <div class="service-intro">
+        <!--   底部导航     -->
         <div class="servece-type">
           <div class="servece-type-info" v-for="(guide, index) in guideArr" :key="index">
             <ul>
@@ -28,7 +31,8 @@
             </ul>
           </div>
         </div>
-        <div class="clearfix"></div>
+<!--        <div class="clearfix"></div>-->
+        <!--    友情链接    -->
         <div class="friend-link">
           <div class="friend-link-item">
             <ul>
@@ -40,7 +44,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="copyright">
-          <p>Copyright © 2018 by Gavin <a href="https://github.com/PowerDos"><Icon type="social-github"></Icon></a> <span>本项目仅供学习参考</span></p>
+          <p>Copyright © 2020 by H <a href="https://github.com/PowerDos"><Icon type="social-github"></Icon></a> <span></span></p>
         </div>
       </div>
     </footer>

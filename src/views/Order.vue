@@ -57,8 +57,6 @@
 <script>
 import Search from '@/views/Search';
 import GoodsListNav from '@/views/nav/GoodsListNav';
-import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Order',
   beforeRouteEnter (to, from, next) {
@@ -196,8 +194,7 @@ export default {
   components: {
     Search,
     GoodsListNav
-  },
-  store
+  }
 };
 </script>
 
