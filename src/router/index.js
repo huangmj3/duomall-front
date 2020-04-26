@@ -3,44 +3,24 @@ import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
 import Login from '../views/user/Login.vue'
 import Register from '../views/user/Register.vue'
-import test from '../views/test.vue'
 
 import GoodsList from '../views/GoodsList'
 import GoodsDetail from '../views/GoodsDetail'
-import ShoppingCart from '../views/ShoppingCart'
-import Order from '@/views/Order'
-import Pay from '@/views/Pay'
-import PayDone from '@/views/PayDone'
-import Freeback from '@/views/Freeback'
-import Home from '@/views/Home'
-import MyAddress from '@/views/home/MyAddress'
-import AddAddress from '@/views/home/AddAddress'
-import MyOrder from '@/views/home/MyOrder'
-import MyShoppingCart from '@/views/home/MyShoppingCart'
-import Merchant from '@/views/Merchant'
-
-// const GoodsList = resolve => require(['../views/GoodsList'], resolve);
-// const GoodsDetail = resolve => require(['../views/GoodsDetail'], resolve);
-// const ShoppingCart = resolve => require(['../views/ShoppingCart'], resolve);
-// const Order = resolve => require(['@/views/Order'], resolve);
-// const Pay = resolve => require(['@/views/Pay'], resolve);
-// const PayDone = resolve => require(['@/views/PayDone'], resolve);
-// const Freeback = resolve => require(['@/views/Freeback'], resolve);
-// const Home = resolve => require(['@/views/Home'], resolve);
-// const MyAddress = resolve => require(['@/views/home/MyAddress'], resolve);
-// const AddAddress = resolve => require(['@/views/home/AddAddress'], resolve);
-// const MyOrder = resolve => require(['@/views/home/MyOrder'], resolve);
-// const MyShoppingCart = resolve => require(['@/views/home/MyShoppingCart'], resolve);
-// const Merchant = resolve => require(['@/views/Merchant'], resolve);
+import ShoppingCart from '../views/header/ShoppingCart'
+import Order from '../views/Order'
+import Pay from '../views/Pay'
+import PayDone from '../views/PayDone'
+import Feedback from '../views/Feedback'
+import Home from '../views/Home'
+import MyAddress from '../views/home/MyAddress'
+import AddAddress from '../views/home/AddAddress'
+import MyOrder from '../views/home/MyOrder'
+import MyShoppingCart from '../views/home/MyShoppingCart'
+import Merchant from '../views/Merchant'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/test',  //首页
-    name: 'test',
-    component: test
-  },
   {
     path: '/',  //首页
     name: 'Index',
@@ -87,9 +67,9 @@ const routes = [
     component: PayDone
   },
   {
-    path: '/freeback', // 反馈页面
-    name: 'Freeback',
-    component: Freeback
+    path: '/feedback', // 反馈页面
+    name: 'Feedback',
+    component: Feedback
   },
   {
     path: '/home', // 我的主页
@@ -123,11 +103,11 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/merchant',
-    name: 'Merchant',
-    component: Merchant
-  }
+//   {
+//     path: '/merchant',
+//     name: 'Merchant',
+//     component: Merchant
+//   }
 ]
 
 const router = new VueRouter({

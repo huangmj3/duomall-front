@@ -1,8 +1,9 @@
+<!--反馈界面-->
 <template>
   <div>
     <div class="freeback-container">
       <div class="freeback-img-box">
-        <img src="../../public/img/freeback.png">
+        <img src="static/img/freeback.png">
       </div>
       <div class="freeback-box-border">
         <div class="freeback-box">
@@ -34,7 +35,7 @@
 
 <script>
 export default {
-  name: 'Freeback',
+  name: 'Feedback',
   data () {
     return {
       formItem: {

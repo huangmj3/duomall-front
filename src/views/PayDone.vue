@@ -1,3 +1,4 @@
+<!--支付成功界面-->
 <template>
   <div>
     <div class="pay-done-box">

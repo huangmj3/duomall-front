@@ -56,32 +56,30 @@
         console.log("这里是store");
         // this.$store.commit('updateUserLoginInfo', payload);
         console.log(this.$store.state);
-        this.$store.commit('test');
         this.$refs[formName].validate((valid) => {
           console.log(this.$store);
           console.log("valid is " + valid);
           if (valid) {
-            login(this.ruleForm.cellphone,this.ruleForm.loginPassword)
-              .then(resp => {
-                console.log("我已经成功拿到所有数据了，现在展示一下")
-                console.log(resp)
-                console.log(resp.data)
-                console.log(resp.data.success)
-                if (resp.success) {
-                  //账号密码正确，登录成功
-                  console.log("喂，我成功了啊")
-                  this.$store.dispatch('updateUserLoginInfo', resp.data);
-                  // window.sessionStorage.setItem("token", resp.data.data.token);
-                  // localStorage.setItem("userId", resp.data.data.userId);
-                  this.$router.push('/');
-                } else {
-                  //账号不存在或密码错误，登录失败
-                  console.log("1");
-                }
-              })
+            this.$store.dispatch('login', this.ruleForm)
+            // login(this.ruleForm.cellphone,this.ruleForm.loginPassword)
+            //   .then(resp => {
+            //     if (resp.success) {
+            //       //账号密码正确，登录成功
+            //       console.log("喂，我成功了啊")
+            //       this.$store.dispatch('updateUserLoginInfo', resp.data);
+            //       // window.sessionStorage.setItem("token", resp.data.data.token);
+            //       // localStorage.setItem("userId", resp.data.data.userId);
+            //       this.$router.push('/');
+            //     } else {
+            //       //账号不存在或密码错误，登录失败
+            //       console.log("1");
+            //     }
+            //   })
+            if (this.$store.state !== '') {
+              this.$router.push('/');
+            }
           } else {
             console.log('error submit!!');
-            return false;
           }
         });
       },

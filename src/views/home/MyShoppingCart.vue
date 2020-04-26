@@ -1,3 +1,4 @@
+<!--我的购物车-->
 <template>
   <div>
     <Table border ref="selection" :columns="columns" :data="shoppingCart" size="large" no-data-text="您的购物车没有商品，请先添加商品到购物车再点击购买"></Table>

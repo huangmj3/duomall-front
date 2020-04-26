@@ -1,3 +1,4 @@
+<!--我的订单界面-->
 <template>
   <div>
     <Table border :columns="columns" :data="order" size="large" no-data-text="你还有订单，快点去购物吧"></Table>
@@ -16,7 +17,7 @@ export default {
         order_id: 1529931938150,
         goods_id: 1529931938150,
         count: 1,
-        img: 'img/goodsDetail/pack/1.jpg',
+        img: 'img/goodsDetail/pack/hot1.jpg',
         package: '4.7英寸-深邃蓝',
         price: 28,
         title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳',

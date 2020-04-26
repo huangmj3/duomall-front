@@ -1,3 +1,4 @@
+<!--商品细节信息导航-->
 <template>
   <div class="shop-nav-box">
     <div class="shop-nav-container">

@@ -1,28 +1,28 @@
 <!--<template>-->
 <!--  <div class="container">-->
 <!--      &lt;!&ndash; 秒杀 &ndash;&gt;-->
-<!--      <div class="seckill">-->
+<!--      <div class="spike">-->
 <!--        &lt;!&ndash; 头部 &ndash;&gt;-->
-<!--        <div class="seckill-head">-->
-<!--          <div class="seckill-icon">-->
+<!--        <div class="spike-head">-->
+<!--          <div class="spike-icon">-->
 <!--            <img src="../assets/img/index/clock.png">-->
 <!--          </div>-->
-<!--          <div class="seckill-text">-->
-<!--            <span class="seckill-title">限时秒杀</span>-->
-<!--            <span class="seckill-remarks">总有你想不到的低价</span>-->
+<!--          <div class="spike-text">-->
+<!--            <span class="spike-title">限时秒杀</span>-->
+<!--            <span class="spike-remarks">总有你想不到的低价</span>-->
 <!--          </div>-->
 <!--        </div>-->
 <!--        &lt;!&ndash; 内容 &ndash;&gt;-->
-<!--        <div class="seckill-content">-->
-<!--          <div class="seckill-item" v-for="(item, index) in seckills.goodsList" :key="index">-->
-<!--            <div class="seckill-item-img">-->
+<!--        <div class="spike-content">-->
+<!--          <div class="spike-item" v-for="(item, index) in seckills.goodsList" :key="index">-->
+<!--            <div class="spike-item-img">-->
 <!--              <router-link to="/goodsList"><img :src="item.img"></router-link>-->
 <!--            </div>-->
-<!--            <div class="seckill-item-info">-->
+<!--            <div class="spike-item-info">-->
 <!--              <p>{{item.intro}}</p>-->
 <!--              <p>-->
-<!--                <span class="seckill-price text-danger"><Icon type="social-yen"></Icon>{{item.price}}</span>-->
-<!--                <span class="seckill-old-price"><s>{{item.realPrice}}</s></span>-->
+<!--                <span class="spike-price text-danger"><Icon type="social-yen"></Icon>{{item.price}}</span>-->
+<!--                <span class="spike-old-price"><s>{{item.realPrice}}</s></span>-->
 <!--              </p>-->
 <!--            </div>-->
 <!--          </div>-->
@@ -41,31 +41,31 @@
 <!--        goodsList: [-->
 <!--          {-->
 <!--            intro: '【赠小风扇】维他 柠檬茶250ml*32盒 礼品装 整箱',-->
-<!--            img: '/img/index/seckill/seckill-item2.jpg',-->
+<!--            img: '/img/index/spike/spike-item2.jpg',-->
 <!--            price: 71.9,-->
 <!--            realPrice: 89.6-->
 <!--        },-->
 <!--        {-->
 <!--            intro: 'Kindle Paperwhite 全新升级版6英寸护眼非反光电子墨水',-->
-<!--            img: '/img/index/seckill/seckill-item2.jpg',-->
+<!--            img: '/img/index/spike/spike-item2.jpg',-->
 <!--            price: 989.0,-->
 <!--            realPrice: 1299.0-->
 <!--        },-->
 <!--        {-->
 <!--            intro: '粮悦 大吃兄糯米锅巴 安徽特产锅巴糯米原味400g*2盒',-->
-<!--            img: '/img/index/seckill/seckill-item3.jpg',-->
+<!--            img: '/img/index/spike/spike-item3.jpg',-->
 <!--            price: 21.8,-->
 <!--            realPrice: 49.0-->
 <!--        },-->
 <!--        {-->
 <!--            intro: '【京东超市】清风（APP）抽纸 原木纯品金装系列 3层',-->
-<!--            img: '/img/index/seckill/seckill-item4.jpg',-->
+<!--            img: '/img/index/spike/spike-item4.jpg',-->
 <!--            price: 49.9,-->
 <!--            realPrice: 59.0-->
 <!--        },-->
 <!--        {-->
 <!--            intro: 'NIKE耐克 男子休闲鞋 AIR MAX 90 ESSENTIAL 气垫',-->
-<!--            img: '/img/index/seckill/seckill-item5.jpg',-->
+<!--            img: '/img/index/spike/spike-item5.jpg',-->
 <!--            price: 559.9,-->
 <!--            realPrice: 759.9-->
 <!--        }-->
@@ -98,23 +98,23 @@
 <!--}-->
 <!--/*****************************秒杀专栏开始*****************************/-->
 <!--/*秒杀专栏*/-->
-<!--.seckill {-->
+<!--.spike {-->
 <!--  width: 100%;-->
 <!--  height: 330px;-->
 <!--  margin: 15px auto;-->
 <!--  background-color: #fff;-->
 <!--}-->
-<!--.seckill-head {-->
+<!--.spike-head {-->
 <!--  width: 100%;-->
 <!--  height: 50px;-->
 <!--  background-color: #e01222;-->
 <!--}-->
-<!--.seckill-icon {-->
+<!--.spike-icon {-->
 <!--  width: 68px;-->
 <!--  height: 100%;-->
 <!--  float: left;-->
 <!--}-->
-<!--.seckill-icon img {-->
+<!--.spike-icon img {-->
 <!--  width: 35px;-->
 <!--  height: 35px;-->
 <!--  margin-top: 6px;-->
@@ -135,17 +135,17 @@
 <!--    transform: rotate(-8deg);-->
 <!--  }-->
 <!--}-->
-<!--.seckill-text {-->
+<!--.spike-text {-->
 <!--  width: 300px;-->
 <!--  height: 100%;-->
 <!--  float: left;-->
 <!--}-->
-<!--.seckill-text .seckill-title {-->
+<!--.spike-text .spike-title {-->
 <!--  font-size: 22px;-->
 <!--  line-height: 50px;-->
 <!--  color: #fff;-->
 <!--}-->
-<!--.seckill-text .seckill-remarks {-->
+<!--.spike-text .spike-remarks {-->
 <!--  margin-left: 5px;-->
 <!--  font-size: 10px;-->
 <!--  color: #fff;-->
@@ -174,11 +174,11 @@
 <!--  color: #440106;-->
 <!--}-->
 
-<!--.seckill-content {-->
+<!--.spike-content {-->
 <!--  width: 100%;-->
 <!--  height: 280px;-->
 <!--}-->
-<!--.seckill-item {-->
+<!--.spike-item {-->
 <!--  width: 183px;-->
 <!--  height: 250px;-->
 <!--  margin-top: 15px;-->
@@ -187,7 +187,7 @@
 <!--  cursor: pointer;-->
 <!--  float: left;-->
 <!--}-->
-<!--.seckill-item-img {-->
+<!--.spike-item-img {-->
 <!--  width: 160px;-->
 <!--  height: 160px;-->
 <!--  margin: 0px auto;-->
@@ -195,28 +195,28 @@
 <!--  border-bottom: 1px solid #ccc;-->
 <!--  background-color: #fff;-->
 <!--}-->
-<!--.seckill-item-img img {-->
+<!--.spike-item-img img {-->
 <!--  width: 130px;-->
 <!--  height: 130px;-->
 <!--  margin-left: 15px;-->
 <!--  margin-top: 15px;-->
 <!--  transition: margin-top 0.3s;-->
 <!--}-->
-<!--.seckill-item-img:hover img {-->
+<!--.spike-item-img:hover img {-->
 <!--  margin-top: 6px;-->
 <!--  transition: margin-top 0.3s;-->
 <!--}-->
-<!--.seckill-item-info {-->
+<!--.spike-item-info {-->
 <!--  padding: 5px;-->
 <!--  padding-left: 15px;-->
 <!--  padding-right: 15px;-->
 <!--  font-size: 12px;-->
 <!--  color: #009688;-->
 <!--}-->
-<!--.seckill-item-info i:first-child {-->
+<!--.spike-item-info i:first-child {-->
 <!--  font-size: 14px;-->
 <!--}-->
-<!--.seckill-price {-->
+<!--.spike-price {-->
 <!--  margin-right: 5px;-->
 <!--  font-size: 25px;-->
 <!--  font-weight: bold;-->

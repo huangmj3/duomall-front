@@ -1,3 +1,4 @@
+<!--商品界面头-->
 <template>
   <div class="shop-box">
     <div class="shop-container">
@@ -36,15 +37,15 @@ export default {
         slogen: 'The Best Thing For You',
         showGoods: [
           {
-            img: 'static/img/goodsList/item-show-1.jpg',
+            img: 'static/img/goodsList/item-show-hot1.jpg',
             intro: [ '全身磨砂', '防指纹' ]
           },
           {
-            img: 'static/img/goodsList/item-show-2.jpg',
+            img: 'static/img/goodsList/item-show-hot2.jpg',
             intro: [ '环保PP材质', '不发黄' ]
           },
           {
-            img: 'static/img/goodsList/item-show-3.jpg',
+            img: 'static/img/goodsList/item-show-hot3.jpg',
             intro: [ '0.4mm纤细', '纤薄手感' ]
           }
         ]

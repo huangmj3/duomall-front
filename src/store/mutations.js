@@ -10,55 +10,74 @@ export default {
   //   }
   // },
 
-  //更新用户信息
-  updateUserLoginInfo(state,userInfo) {
+  //用户登录成功，更新用户信息
+  UPDATE_USER_LOGIN_INFO(state, userInfo) {
     console.log("正在更新用户信息")
-    if(userInfo === ''){
-      state.userInfo.username = ''
+    if (userInfo === '') {
+      state.userInfo.name = ''
       state.userInfo.token = ''
-    }else {
-      state.userInfo.username = userInfo.username
+    } else {
+      state.userInfo.name = userInfo.name
       state.userInfo.token = userInfo.token
     }
     console.log("用户信息更新完成")
   },
-
-  test() {
-    console.log("test success");
-  },
-
-  // 设置注册步骤
-  SET_SIGN_UP_SETP(state, step) {
-    state.signUpStep = step
-  },
-
-// export const SET_USER_LOGIN_INFO = (state, data) => {
-//   state.userId = data;
-// };
 
   // 设置加载状态
   SET_LOAD_STATUS(state, status) {
     state.isLoading = status
   },
 
+  // 设置秒杀商品
+  SET_SPIKE_INFO(state, spike) {
+    state.spike.goodsList = spike[0];
+    state.spike.deadline = spike[1];
+  },
+
   // 设置轮播(营销)图
-  SET_CAROUSELITEMS_INFO(state, {carouselItems, activity}) {
+  SET_CAROUSEL_ITEMS_INFO(state, {carouselItems, activity}) {
     state.marketing.CarouselItems = carouselItems
     state.marketing.activity = activity
   },
 
-
   // 减少秒杀时间
-  REDUCE_SECKILLS_TIME(state) {
-    state.seckills.deadline.seconds--;
-    if (state.seckills.deadline.seconds === -1) {
-      state.seckills.deadline.seconds = 59;
-      state.seckills.deadline.minute--;
-      if (state.seckills.deadline.minute === -1) {
-        state.seckills.deadline.minute = 59;
-        state.seckills.deadline.hour--;
+  REDUCE_SPIKE_TIME(state) {
+    state.spike.deadline.seconds--;
+    if (state.spike.deadline.seconds === -1) {
+      state.spike.deadline.seconds = 59;
+      state.spike.deadline.minute--;
+      if (state.spike.deadline.minute === -1) {
+        state.spike.deadline.minute = 59;
+        state.spike.deadline.hour--;
       }
     }
+  },
+
+
+  // 设置电脑专栏数据
+  SET_COMPUTER_INFO(state, computer) {
+    state.computer = computer;
+  },
+
+  // 设置爱吃专栏数据
+  SET_EAT_INFO(state, eat) {
+    state.eat = eat;
+  },
+
+  // 设置商品列表(搜索)
+  SET_GOODS_LIST(state, data) {
+    state.goodsList = data.goodsList;
+    state.asItems = data.asItems;
+  },
+
+  // 设置商品列表排序
+  SET_GOODS_ORDER_BY(state, data) {
+    state.orderBy = data;
+  },
+
+  // 设置商品详细信息
+  SET_GOODS_INFO(state, data) {
+    state.goodsInfo = data;
   },
 
 
@@ -80,6 +99,16 @@ export default {
   SET_SHOPPING_CART(state, data) {
     state.shoppingCart = data;
   },
+
+  // 设置推荐信息
+  SET_RECOMMEND_INFO(state, data) {
+    state.recommend = data;
+  },
+
+  // 设置收获地址
+  SET_USER_ADDRESS(state, data) {
+    state.address = data;
+  }
 
 }
 

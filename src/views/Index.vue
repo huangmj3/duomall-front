@@ -1,3 +1,4 @@
+<!--首页组件-->
 <template>
   <div class="container">
     <Search></Search>
@@ -5,37 +6,37 @@
      商品显示区域
     <div class="content">
       <!-- 秒杀 -->
-      <div class="seckill">
+      <div class="spike">
         <!-- 头部 -->
-        <div class="seckill-head">
-          <div class="seckill-icon">
+        <div class="spike-head">
+          <div class="spike-icon">
             <img src="../assets/img/index/clock.png">
           </div>
-          <div class="seckill-text">
-            <span class="seckill-title">限时秒杀</span>
-            <span class="seckill-remarks">总有你想不到的低价</span>
+          <div class="spike-text">
+            <span class="spike-title">限时秒杀</span>
+            <span class="spike-remarks">总有你想不到的低价</span>
           </div>
           <div class="count-down">
             <span class="count-down-text">当前场次</span>
-            <span class="count-down-num count-down-hour">{{$store.getters.seckillsHours }}</span>
+            <span class="count-down-num count-down-hour">{{$store.getters.spikeHours}}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-minute">{{$store.getters.seckillsMinutes }}</span>
+            <span class="count-down-num count-down-minute">{{$store.getters.spikeMinutes}}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-seconds">{{$store.getters.seckillsSeconds }}</span>
+            <span class="count-down-num count-down-seconds">{{$store.getters.spikeSeconds}}</span>
             <span class="count-down-text">后结束抢购</span>
           </div>
         </div>
         <!-- 内容 -->
-        <div class="seckill-content">
-          <div class="seckill-item" v-for="(item, index) in seckills.goodsList" :key="index">
-            <div class="seckill-item-img">
+        <div class="spike-content">
+          <div class="spike-item" v-for="(item, index) in spike.goodsList" :key="index">
+            <div class="spike-item-img">
               <router-link to="/goodsList"><img :src="item.img"></router-link>
             </div>
-            <div class="seckill-item-info">
+            <div class="spike-item-info">
               <p>{{item.intro}}</p>
               <p>
-                <span class="seckill-price text-danger"><Icon type="social-yen"></Icon>{{item.price}}</span>
-                <span class="seckill-old-price"><s>{{item.realPrice}}</s></span>
+                <span class="spike-price text-danger"><Icon type="social-yen"></Icon>{{item.price}}</span>
+                <span class="spike-old-price"><s>{{item.realPrice}}</s></span>
               </p>
             </div>
           </div>
@@ -124,216 +125,43 @@
 </template>
 
 <script>
-import Search from '../views/Search';
+import Search from './search/Search';
 import HomeNav from '../views/nav/HomeNav';
+import {mapGetters, mapState} from "vuex";
 export default {
   name: 'Index',
   created () {
+    this.$store.dispatch('loadSpikeInfo');
     this.$store.dispatch('loadCarouselItems');
+    this.$store.dispatch('loadComputer');
+    this.$store.dispatch('loadEat');
+    this.$store.dispatch('loadShoppingCart');
   },
   mounted () {
     const father = this;
     this.setIntervalObj = setInterval(function () {
-      father.$store.commit('REDUCE_SECKILLS_TIME');
+      father.$store.commit('REDUCE_SPIKE_TIME');
     }, 1000);
   },
   data () {
     return {
-      setIntervalObj: null,
-      seckills: {
-        goodsList: [
-          {
-            intro: '【赠小风扇】维他 柠檬茶250ml*32盒 礼品装 整箱',
-            img: '/img/index/seckill/seckill-item1.jpg',
-            price: 71.9,
-            realPrice: 89.6
-          },
-          {
-            intro: 'Kindle Paperwhite 全新升级版6英寸护眼非反光电子墨水',
-            img: '/img/index/seckill/seckill-item2.jpg',
-            price: 989.0,
-            realPrice: 1299.0
-          },
-          {
-            intro: '粮悦 大吃兄糯米锅巴 安徽特产锅巴糯米原味400g*2盒',
-            img: '/img/index/seckill/seckill-item3.jpg',
-            price: 21.8,
-            realPrice: 49.0
-          },
-          {
-            intro: '【京东超市】清风（APP）抽纸 原木纯品金装系列 3层',
-            img: '/img/index/seckill/seckill-item4.jpg',
-            price: 49.9,
-            realPrice: 59.0
-          },
-          {
-            intro: 'NIKE耐克 男子休闲鞋 AIR MAX 90 ESSENTIAL 气垫',
-            img: '/img/index/seckill/seckill-item5.jpg',
-            price: 559.9,
-            realPrice: 759.9
-          }
-        ]
-      },
-      computer: {
-        title: '电脑数码',
-        link: [ '电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊' ],
-        detail: [
-          {
-            bigImg: 'img/index/computer/item-computer-1.jpg',
-            itemFour: [
-              {
-                title: '电脑馆',
-                intro: '笔记本999元限量秒！',
-                img: 'img/index/computer/item-computer-2.jpg'
-              },
-              {
-                title: '外设装备',
-                intro: '1000减618',
-                img: 'img/index/computer/item-computer-1-3.jpg'
-              },
-              {
-                title: '电脑配件',
-                intro: '联合满减最高省618',
-                img: 'img/index/computer/item-computer-1-4.jpg'
-              },
-              {
-                title: '办公生活',
-                intro: '5折神券 精品文具',
-                img: 'img/index/computer/item-computer-1-5.jpg'
-              }
-            ],
-            itemContent: [
-              'img/index/computer/item-computer-1-6.jpg',
-              'img/index/computer/item-computer-1-7.jpg',
-              'img/index/computer/item-computer-1-8.jpg'
-            ]
-          },
-          {
-            bigImg: 'img/index/computer/item-computer-2-1.jpg',
-            itemFour: [
-              {
-                title: '平板电脑',
-                intro: '爆款平板12期免息',
-                img: 'img/index/computer/item-computer-2-2.jpg'
-              },
-              {
-                title: '智能酷玩',
-                intro: '抢999减666神券',
-                img: 'img/index/computer/item-computer-2-3.jpg'
-              },
-              {
-                title: '娱乐影音',
-                intro: '大牌耳机低至5折',
-                img: 'img/index/computer/item-computer-2-4.jpg'
-              },
-              {
-                title: '摄影摄像',
-                intro: '大牌相机5折抢',
-                img: 'img/index/computer/item-computer-2-5.jpg'
-              }
-            ],
-            itemContent: [
-              'img/index/computer/item-computer-2-6.jpg',
-              'img/index/computer/item-computer-2-7.jpg',
-              'img/index/computer/item-computer-2-8.jpg'
-            ]
-          }
-        ]
-      },
-      eat: {
-        title: '爱吃',
-        link: [ '休闲零食', '坚果', '牛奶', '饮料冲调', '食用油', '大米', '白酒', '红酒', '烧烤食材', '牛排', '樱桃' ],
-        detail: [
-          {
-            bigImg: 'img/index/eat/item-eat-1-1.jpg',
-            itemFour: [
-              {
-                title: '粮油调味',
-                intro: '买2免1',
-                img: 'img/index/eat/item-eat-1-2.jpg'
-              },
-              {
-                title: '饮料冲调',
-                intro: '第二件半价',
-                img: 'img/index/eat/item-eat-1-3.jpg'
-              },
-              {
-                title: '休闲零食',
-                intro: '满99减40',
-                img: 'img/index/eat/item-eat-1-4.jpg'
-              },
-              {
-                title: '中外名酒',
-                intro: '满199减100',
-                img: 'img/index/eat/item-eat-1-5.jpg'
-              }
-            ],
-            itemContent: [
-              'img/index/eat/item-eat-1-6.jpg',
-              'img/index/eat/item-eat-1-7.jpg',
-              'img/index/eat/item-eat-1-8.jpg'
-            ]
-          },
-          {
-            bigImg: 'img/index/eat/item-eat-2-1.jpg',
-            itemFour: [
-              {
-                title: '东家菜',
-                intro: '丰富好味',
-                img: 'img/index/eat/item-eat-2-2.jpg'
-              },
-              {
-                title: '东家菜',
-                intro: '丰富好味',
-                img: 'img/index/eat/item-eat-2-2.jpg'
-              },
-              {
-                title: '东家菜',
-                intro: '丰富好味',
-                img: 'img/index/eat/item-eat-2-2.jpg'
-              },
-              {
-                title: '东家菜',
-                intro: '丰富好味',
-                img: 'img/index/eat/item-eat-2-2.jpg'
-              }
-            ],
-            itemContent: [
-              'img/index/eat/item-eat-2-6.jpg',
-              'img/index/eat/item-eat-2-7.jpg',
-              'img/index/eat/item-eat-2-8.jpg'
-            ]
-          }
-        ]
-      }
-    }
-  },
-  methods: {
-    // ...mapActions(['loadSeckillsInfo', 'loadCarouselItems', 'loadComputer', 'loadEat', 'loadShoppingCart']),
-    // ...mapActions(['loadCarouselItems']),
-    // ...mapMutations(['REDUCE_SECKILLS_TIME'])
-  },
+      setIntervalObj: null
+  }},
   computed: {
-    // ...mapState([ 'seckills', 'computer', 'eat' ]),
-    // seckills(){
-    //   return this.$store.state.seckills;
-    // },
-    // computer(){
-    //   return this.$store.state.computer;
-    // },
-    // eat(){
-    //   return this.$store.state.eat;
-    // },
-    seckillsHours(){
-      return this.$store.getters.seckillsHours()
+    ...mapState([ 'spike', 'computer', 'eat' ]),
+    // ...mapGetters([ 'spikeHours', 'spikeMinutes', 'spikeSeconds' ]),
+    spikeHours(){
+      console.log("这里是spikeHours")
+      return this.$store.getters.spikeHours
     },
-    seckillsMinutes(){
-      return this.$store.getters.seckillsMinutes()
+    spikeMinutes(){
+      console.log("这里是spikeMinutes")
+      return this.$store.getters.spikeMinutes
     },
-    seckillsSeconds(){
-      return this.$store.getters.seckillSeconds()
+    spikeSeconds(){
+      console.log("这里是spikeSeconds")
+      return this.$store.getters.spikeSeconds
     }
-    // ...mapGetters([ 'seckillsHours', 'seckillsMinutes', 'seckillsSeconds' ])
   },
   components: {
     Search,
@@ -355,23 +183,23 @@ export default {
 }
 /*****************************秒杀专栏开始*****************************/
 /*秒杀专栏*/
-.seckill {
+.spike {
   width: 100%;
   height: 330px;
   margin: 15px auto;
   background-color: #fff;
 }
-.seckill-head {
+.spike-head {
   width: 100%;
   height: 50px;
   background-color: #e01222;
 }
-.seckill-icon {
+.spike-icon {
   width: 68px;
   height: 100%;
   float: left;
 }
-.seckill-icon img {
+.spike-icon img {
   width: 35px;
   height: 35px;
   margin-top: 6px;
@@ -392,17 +220,17 @@ export default {
     transform: rotate(-8deg);
   }
 }
-.seckill-text {
+.spike-text {
   width: 300px;
   height: 100%;
   float: left;
 }
-.seckill-text .seckill-title {
+.spike-text .spike-title {
   font-size: 22px;
   line-height: 50px;
   color: #fff;
 }
-.seckill-text .seckill-remarks {
+.spike-text .spike-remarks {
   margin-left: 5px;
   font-size: 10px;
   color: #fff;
@@ -431,11 +259,11 @@ export default {
   color: #440106;
 }
 
-.seckill-content {
+.spike-content {
   width: 100%;
   height: 280px;
 }
-.seckill-item {
+.spike-item {
   width: 183px;
   height: 250px;
   margin-top: 15px;
@@ -444,7 +272,7 @@ export default {
   cursor: pointer;
   float: left;
 }
-.seckill-item-img {
+.spike-item-img {
   width: 160px;
   height: 160px;
   margin: 0px auto;
@@ -452,28 +280,26 @@ export default {
   border-bottom: 1px solid #ccc;
   background-color: #fff;
 }
-.seckill-item-img img {
+.spike-item-img img {
   width: 130px;
   height: 130px;
   margin-left: 15px;
   margin-top: 15px;
   transition: margin-top 0.3s;
 }
-.seckill-item-img:hover img {
+.spike-item-img:hover img {
   margin-top: 6px;
   transition: margin-top 0.3s;
 }
-.seckill-item-info {
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+.spike-item-info {
+  padding: 5px 15px;
   font-size: 12px;
   color: #009688;
 }
-.seckill-item-info i:first-child {
+.spike-item-info i:first-child {
   font-size: 14px;
 }
-.seckill-price {
+.spike-price {
   margin-right: 5px;
   font-size: 25px;
   font-weight: bold;

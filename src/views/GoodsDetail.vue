@@ -1,3 +1,4 @@
+<!--商品详情-->
 <template>
   <div>
     <Search></Search>
@@ -21,11 +22,12 @@
 </template>
 
 <script>
-import Search from '@/views/Search';
-import GoodsDetailNav from '@/views/nav/GoodsDetailNav';
-import ShopHeader from '@/views/header/ShopHeader';
-import ShowGoods from '@/views/goods/ShowGoods';
-import ShowGoodsDetail from '@/views/goods/ShowGoodsDetail';
+import Search from './search/Search';
+import GoodsDetailNav from '../views/nav/GoodsDetailNav';
+import ShopHeader from '../views/header/ShopHeader';
+import ShowGoods from '../views/goods/ShowGoods';
+import ShowGoodsDetail from '../views/goods/ShowGoodsDetail';
+import {mapState} from "vuex";
 export default {
   name: 'GoodsDetail',
   beforeRouteEnter (to, from, next) {
@@ -33,20 +35,15 @@ export default {
     next();
   },
   created () {
-    // this.loadGoodsInfo();
+    this.$store.dispatch('loadGoodsInfo');
   },
   data () {
     return {
       tagsColor: [ 'blue', 'green', 'red', 'yellow' ]
     };
   },
-  methods: {
-    // ...mapActions(['loadGoodsInfo'])
-  },
   computed: {
-    isloading(){
-      return this.$store.state.isloading;
-    }
+    ...mapState(['goodsInfo', 'isLoading'])
   },
   components: {
     Search,

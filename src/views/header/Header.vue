@@ -20,13 +20,13 @@
       </ul>
       <ul class="detail">
         <button @click=""></button>
-        <li class="first" v-show="username === ''">
+        <li class="first" v-show="name === ''">
         你好，请<router-link to="/login">登录 <Icon type="person"></Icon></router-link> | <span class="text-color-red"><router-link to="/regist">免费注册 <Icon type="person-add"></Icon></router-link></span>
         </li>
-        <li v-show="username !== ''">
+        <li v-show="name !== ''">
           <Dropdown>
             <p class="username-p">
-              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{username}}</span>
+              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{name}}</span>
             </p>
             <DropdownMenu slot="list">
                 <div class="my-page">
@@ -116,7 +116,7 @@ export default {
         {
           goods_id: 1529931938150,
           count: 1,
-          img: 'img/goodsDetail/pack/1.jpg',
+          img: 'img/goodsDetail/pack/hot1.jpg',
           package: '4.7英寸-深邃蓝',
           price: 28,
           title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳'
@@ -125,8 +125,8 @@ export default {
     };
   },
   computed: {
-    username(){
-      return this.$store.state.userInfo.username;
+    name(){
+      return this.$store.state.userInfo.name;
     },
   },
   methods: {

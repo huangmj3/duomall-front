@@ -1,3 +1,4 @@
+<!--我的地址界面-->
 <template>
   <div>
     <div class="address-box" v-for="(item, index) in address" :key="index">
@@ -53,30 +54,7 @@ export default {
   data () {
     return {
       modal: false,
-      address: [
-        {
-          addressId: '123456',
-          name: 'Gavin',
-          province: '广东省',
-          city: '广州市',
-          area: '天河区',
-          address: '燕岭路633号',
-          phone: '152****0609',
-          postalcode: '510000'
-        },
-        {
-          addressId: '123458',
-          name: 'Kevin',
-          province: '上海市',
-          city: '上海市',
-          area: '浦东新区',
-          address: '沙新镇',
-          phone: '158****0888',
-          postalcode: '200120'
-        }
-      ],
-      formData: {
-        name: '',
+      formData: {name: '',
         address: '',
         phone: '',
         postalcode: '',
@@ -102,13 +80,9 @@ export default {
     };
   },
   created () {
-    // this.loadAddress();
-  },
-  computed: {
-    // ...mapState(['address'])
+    this.loadAddress();
   },
   methods: {
-    // ...mapActions(['loadAddress']),
     edit (index) {
       this.modal = true;
       this.formData.province = this.address[index].province;

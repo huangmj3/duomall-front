@@ -24,20 +24,21 @@ const state = {
     remarks: []
   },
   userInfo: { // 用户信息
-    username: '',
+    name: '',
     token: ''
   },
+  isRegisterSuccess: false,
   userId: '',
   signUpStep: 0, // 登陆步骤
   marketing: { // 营销
     CarouselItems: [], // 轮播图
     activity: [] // 活动
   },
-  seckills: { // 秒杀
+  spike: { // 秒杀
     deadline: {
-      hours: 0,
-      minute: 0,
-      seconds: 0
+      hours: 1,
+      minute: 12,
+      seconds: 3
     },
     goodsList: []
   },
@@ -52,6 +53,7 @@ const state = {
 
 export default new Vuex.Store({
   state,
+  getters,
   mutations,
   actions,
   modules: {
