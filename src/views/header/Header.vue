@@ -1,3 +1,4 @@
+<!--头部组件-->
 <template>
   <div class="box">
     <div class="nav">

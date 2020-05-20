@@ -1,7 +1,7 @@
-import {request} from './request'
+import {request} from '../request'
 
 //注册网络模块
-export function register_request(ruleForm) {
+export function registerRequest(ruleForm) {
   console.log("这里是注册网络模块")
   console.log(ruleForm)
   return request({

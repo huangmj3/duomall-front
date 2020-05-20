@@ -1,3 +1,4 @@
+<!--精选商品-->
 <template>
   <div class="item-class-show">
     <Row class="item-class-group" v-for="(items, index) in tagsInfo" :key="index">

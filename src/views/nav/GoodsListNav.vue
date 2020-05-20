@@ -1,3 +1,4 @@
+<!--商品列表导航-->
 <template>
   <div>
     <div class="search-nav">

@@ -41,7 +41,7 @@ export default {
         name: '',
         address: '',
         phone: '',
-        postalcode: '',
+        postcode: '',
         province: '广东省',
         city: '广州市',
         area: '天河区'
@@ -53,7 +53,7 @@ export default {
         address: [
           { required: true, message: '请输入地址', trigger: 'blur' }
         ],
-        postalcode: [
+        postcode: [
           { required: true, message: '请输入邮政编码', trigger: 'blur' }
         ],
         phone: [

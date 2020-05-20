@@ -29,9 +29,31 @@ export default {
   },
 
   // 设置秒杀商品
-  SET_SPIKE_INFO(state, spike) {
-    state.spike.goodsList = spike[0];
-    state.spike.deadline = spike[1];
+  SET_SPIKE_INFO(state, spikeInfo) {
+    const length = spikeInfo.goodsList.length
+    let data = Array(0)
+    for (let i = 0; i < length; i++) {
+      let intro = spikeInfo.goodsList[i].intro
+      let price = spikeInfo.goodsList[i].discountPrice
+      let realPrice = spikeInfo.goodsList[i].originalPrice
+      let img = spikeInfo.goodsImageList[i].image
+
+      const item = {
+        intro: intro,
+        price: price,
+        realPrice: realPrice,
+        img: img
+      }
+      data.push(item)
+    }
+    const deadline = {
+      hours: spikeInfo.spikeHours,
+      minute: spikeInfo.spikeMinutes,
+      seconds: spikeInfo.spikeSeconds
+    }
+    console.log('这里是设置秒杀')
+    state.spike.goodsList = data
+    state.spike.deadline = deadline;
   },
 
   // 设置轮播(营销)图
@@ -108,6 +130,8 @@ export default {
   // 设置收获地址
   SET_USER_ADDRESS(state, data) {
     state.address = data;
+    console.log("用户地址加载完成")
+    console.log(state.address)
   }
 
 }

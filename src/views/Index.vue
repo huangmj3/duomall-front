@@ -8,6 +8,7 @@
       <!-- 秒杀 -->
       <div class="spike">
         <!-- 头部 -->
+        <button @click="test()">111111111</button>
         <div class="spike-head">
           <div class="spike-icon">
             <img src="../assets/img/index/clock.png">
@@ -18,11 +19,11 @@
           </div>
           <div class="count-down">
             <span class="count-down-text">当前场次</span>
-            <span class="count-down-num count-down-hour">{{$store.getters.spikeHours}}</span>
+            <span class="count-down-num count-down-hour">{{spikeHours}}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-minute">{{$store.getters.spikeMinutes}}</span>
+            <span class="count-down-num count-down-minute">{{spikeMinutes}}</span>
             <span class="count-down-point">:</span>
-            <span class="count-down-num count-down-seconds">{{$store.getters.spikeSeconds}}</span>
+            <span class="count-down-num count-down-seconds">{{spikeSeconds}}</span>
             <span class="count-down-text">后结束抢购</span>
           </div>
         </div>
@@ -152,6 +153,7 @@ export default {
     // ...mapGetters([ 'spikeHours', 'spikeMinutes', 'spikeSeconds' ]),
     spikeHours(){
       console.log("这里是spikeHours")
+      console.log(this.$store.getters.spikeHours)
       return this.$store.getters.spikeHours
     },
     spikeMinutes(){
@@ -169,6 +171,11 @@ export default {
   },
   destroyed () {
     clearInterval(this.setIntervalObj);
+  },
+  methods:{
+    test(){
+      console.log(this)
+    }
   }
 };
 </script>

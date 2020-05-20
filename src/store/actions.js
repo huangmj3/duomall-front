@@ -1,5 +1,8 @@
-import {login_request} from "../network/login";
-import {register_request} from "../network/register";
+import {loginRequest} from "../network/user/login";
+import axios from 'axios'
+import {getSpikeGoodsInformationRequest} from "../network/spikeGoods/getSpikeGoodsInformation";
+import {searchGoodsByKeyRequest} from "../network/commonGoods/searchGoodsByKey";
+import {searchGoodsByTypeRequest} from "../network/commonGoods/searchGoodsByType";
 
 export default {
   // //用户注册
@@ -17,7 +20,7 @@ export default {
   // 用户登录
   login(context, data) {
     console.log("this is actions")
-    login_request(data.cellphone, data.loginPassword)
+    loginRequest(data.cellphone, data.loginPassword)
       .then(resp => {
         if (resp.success) {
           //账号密码正确，登录成功
@@ -63,52 +66,14 @@ export default {
 
   // 获取秒杀数据
   loadSpikeInfo(context) {
-    return new Promise((resolve, reject) => {
-      const data = [
-        {
-          intro: '【赠小风扇】维他 柠檬茶250ml*32盒 礼品装 整箱',
-          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/seckill-item1.jpg',
-          price: 71.9,
-          realPrice: 89.6
-        },
-        {
-          intro: 'Kindle Paperwhite 全新升级版6英寸护眼非反光电子墨水',
-          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/seckill-item2.jpg',
-          price: 989.0,
-          realPrice: 1299.0
-        },
-        {
-          intro: '粮悦 大吃兄糯米锅巴 安徽特产锅巴糯米原味400g*2盒',
-          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/seckill-item3.jpg',
-          price: 21.8,
-          realPrice: 49.0
-        },
-        {
-          intro: '【京东超市】清风（APP）抽纸 原木纯品金装系列 3层',
-          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/seckill-item4.jpg',
-          price: 49.9,
-          realPrice: 59.0
-        },
-        {
-          intro: 'NIKE耐克 男子休闲鞋 AIR MAX 90 ESSENTIAL 气垫',
-          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/seckill-item5.jpg',
-          price: 559.9,
-          realPrice: 759.9
-        }
-      ];
-      const date = new Date();
-      const hours = date.getHours();
-      const minute = date.getMinutes();
-      const seconds = date.getSeconds();
-      console.log([hours, minute, seconds]);
-      // 距离开始秒杀时间
-      const deadline = {
-        hours: 1,
-        minute: 38,
-        seconds: 36
-      };
-      context.commit('SET_SPIKE_INFO', [data, deadline]);
-    });
+    console.log("这里正准备获取秒杀数据")
+    getSpikeGoodsInformationRequest()
+      //   axios.get('http://127.0.0.1:8802/getSpikeGoodsInformation')
+      .then(resp => {
+        console.log("已经拿到秒杀数据，下面做一下展示")
+        console.log(resp)
+        context.commit('SET_SPIKE_INFO', resp)
+      })
   },
 
   // 获取轮播(营销)图片
@@ -133,8 +98,19 @@ export default {
 
   // 加载电脑专栏数据
   loadComputer(context) {
+    searchGoodsByTypeRequest("电脑")
+      .then(resp => {
+        console.log("已经拿到电脑数据，下面做一下展示")
+        console.log(resp)
+      })
+    // let computer = searchGoodsByTypeRequest();
+   searchGoodsByTypeRequest("数码")
+      .then(resp => {
+        console.log("已经拿到数码数据，下面做一下展示")
+        console.log(resp)
+      })
     return new Promise((resolve, reject) => {
-      const computer = {
+      let computerAndDigital = {
         title: '电脑数码',
         link: ['电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊'],
         detail: [
@@ -200,7 +176,7 @@ export default {
           }
         ]
       };
-      context.commit('SET_COMPUTER_INFO', computer);
+      context.commit('SET_COMPUTER_INFO', computerAndDigital);
     });
   },
 
@@ -479,7 +455,7 @@ export default {
     });
   },
 
-  // 获取商品列表
+  // 根据关键词，获取商品列表（商品搜索功能）
   loadGoodsList(context) {
     context.commit('SET_LOAD_STATUS', true);
     return new Promise((resolve, reject) => {
@@ -731,6 +707,7 @@ export default {
 
   //加载用户地址
   loadAddress(context) {
+    console.log("正在加载用户地址")
     return new Promise((resolve, reject) => {
       const address = [
         {
@@ -741,7 +718,7 @@ export default {
           area: '天河区',
           address: '燕岭路633号',
           phone: '152****0609',
-          postalcode: '510000'
+          postcode: '510000'
         },
         {
           addressId: '123458',
@@ -751,7 +728,7 @@ export default {
           area: '浦东新区',
           address: '沙新镇',
           phone: '158****0888',
-          postalcode: '200120'
+          postcode: '200120'
         }
       ];
       context.commit('SET_USER_ADDRESS', address);

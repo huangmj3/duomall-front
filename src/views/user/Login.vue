@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {login} from "../../network/login";
+  import {login} from "../../network/user/login";
 
   export default {
     data() {
@@ -52,29 +52,9 @@
     },
     methods: {
       submitForm(formName) {
-        const _this = this;
-        console.log("这里是store");
-        // this.$store.commit('updateUserLoginInfo', payload);
-        console.log(this.$store.state);
         this.$refs[formName].validate((valid) => {
-          console.log(this.$store);
-          console.log("valid is " + valid);
           if (valid) {
             this.$store.dispatch('login', this.ruleForm)
-            // login(this.ruleForm.cellphone,this.ruleForm.loginPassword)
-            //   .then(resp => {
-            //     if (resp.success) {
-            //       //账号密码正确，登录成功
-            //       console.log("喂，我成功了啊")
-            //       this.$store.dispatch('updateUserLoginInfo', resp.data);
-            //       // window.sessionStorage.setItem("token", resp.data.data.token);
-            //       // localStorage.setItem("userId", resp.data.data.userId);
-            //       this.$router.push('/');
-            //     } else {
-            //       //账号不存在或密码错误，登录失败
-            //       console.log("1");
-            //     }
-            //   })
             if (this.$store.state !== '') {
               this.$router.push('/');
             }

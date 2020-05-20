@@ -1,3 +1,4 @@
+<!--购物车组件-->
 <template>
   <div>
     <Search></Search>

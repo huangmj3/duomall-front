@@ -6,6 +6,7 @@ export function request(config) {
   //创建axios实例
   const instance = axios.create({
     baseURL: 'http://huangmj.top/back',
+    // baseURL: 'http://localhost:8706',
     timeout: 5000
   })
   //axios拦截器

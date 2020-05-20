@@ -1,7 +1,8 @@
 <!--我的地址界面-->
 <template>
   <div>
-    <div class="address-box" v-for="(item, index) in address" :key="index">
+    <!--    <button>{{formData.address}}</button>-->
+    <div class="address-box" v-for="(item, index) in formData.address" :key="index">
       <div class="address-header">
         <span>{{item.name}}</span>
         <div class="address-action">
@@ -13,133 +14,161 @@
         <p><span class="address-content-title"> 收 货 人 :</span> {{item.name}}</p>
         <p><span class="address-content-title">收货地区:</span> {{item.province}} {{item.city}} {{item.area}}</p>
         <p><span class="address-content-title">收货地址:</span> {{item.address}}</p>
-        <p><span class="address-content-title">邮政编码:</span> {{item.postalcode}}</p>
+        <p><span class="address-content-title">邮政编码:</span> {{item.postcode}}</p>
       </div>
     </div>
     <Modal v-model="modal" width="530">
-        <p slot="header">
-          <Icon type="edit"></Icon>
-          <span>修改地址</span>
-        </p>
-        <div>
-            <Form :model="formData" label-position="left" :label-width="100" :rules="ruleInline">
-              <FormItem label="收件人" prop="name">
-                <i-input v-model="formData.name" size="large"></i-input>
-              </FormItem>
-              <FormItem label="收件地区" prop="address">
-                <Distpicker :province="formData.province" :city="formData.city" :area="formData.area" @province="getProvince" @city="getCity" @area="getArea"></Distpicker>
-              </FormItem>
-              <FormItem label="收件地址" prop="address">
-                <i-input v-model="formData.address" size="large"></i-input>
-              </FormItem>
-              <FormItem label="手机号码" prop="phone">
-                <i-input v-model="formData.phone" size="large"></i-input>
-              </FormItem>
-              <FormItem label="邮政编码" prop="postalcode">
-                <i-input v-model="formData.postalcode" size="large"></i-input>
-              </FormItem>
-            </Form>
-        </div>
-        <div slot="footer">
-            <Button type="primary" size="large" long @click="editAction">修改</Button>
-        </div>
+      <p slot="header">
+        <Icon type="edit"></Icon>
+        <span>修改地址</span>
+      </p>
+      <div>
+        <Form :model="formData" label-position="left" :label-width="100" :rules="ruleInline">
+          <FormItem label="收件人" prop="name">
+            <i-input v-model="formData.name" size="large"></i-input>
+          </FormItem>
+          <FormItem label="收件地区" prop="address">
+            <!--                    <Distpicker :province="formData.province" :city="formData.city" :area="formData.area" @province="getProvince" @city="getCity" @area="getArea"></Distpicker>-->
+<!--            <Distpicker :province="formData.province" :city="formData.city" :area="formData.area"></Distpicker>-->
+          </FormItem>
+          <FormItem label="收件地址" prop="address">
+            <i-input v-model="formData.address" size="large"></i-input>
+          </FormItem>
+          <FormItem label="手机号码" prop="phone">
+            <i-input v-model="formData.phone" size="large"></i-input>
+          </FormItem>
+          <FormItem label="邮政编码" prop="postcode">
+            <i-input v-model="formData.postcode" size="large"></i-input>
+          </FormItem>
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button type="primary" size="large" long @click="editAction">修改</Button>
+      </div>
     </Modal>
   </div>
 </template>
 
 <script>
-import Distpicker from 'v-distpicker';
-export default {
-  name: 'MyAddress',
-  data () {
-    return {
-      modal: false,
-      formData: {name: '',
-        address: '',
-        phone: '',
-        postalcode: '',
-        province: '广东省',
-        city: '广州市',
-        area: '天河区'
-      },
-      ruleInline: {
-        name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' }
-        ],
-        address: [
-          { required: true, message: '请输入地址', trigger: 'blur' }
-        ],
-        postalcode: [
-          { required: true, message: '请输入邮政编码', trigger: 'blur' }
-        ],
-        phone: [
-          { required: true, message: '手机号不能为空', trigger: 'blur' },
-          { type: 'string', pattern: /^1[3|4|5|7|8][0-9]{9}$/, message: '手机号格式出错', trigger: 'blur' }
-        ]
-      }
-    };
-  },
-  created () {
-    this.loadAddress();
-  },
-  methods: {
-    edit (index) {
-      this.modal = true;
-      this.formData.province = this.address[index].province;
-      this.formData.city = this.address[index].city;
-      this.formData.area = this.address[index].area;
-      this.formData.address = this.address[index].address;
-      this.formData.name = this.address[index].name;
-      this.formData.phone = this.address[index].phone;
-      this.formData.postalcode = this.address[index].postalcode;
-    },
-    editAction () {
-      this.modal = false;
-      this.$Message.success('修改成功');
-    },
-    del (index) {
-      this.$Modal.confirm({
-        title: '信息提醒',
-        content: '你确定删除这个收货地址',
-        onOk: () => {
-          this.$Message.success('删除成功');
+  import Distpicker from 'v-distpicker';
+
+  export default {
+    name: 'MyAddress',
+    data() {
+      return {
+        modal: false,
+        formData: {
+          name: '',
+          address: [
+            {
+              addressId: '123456',
+              name: 'Gavin',
+              province: '广东省',
+              city: '广州市',
+              area: '天河区',
+              address: '燕岭路633号',
+              phone: '152****0609',
+              postcode: '510000'
+            },
+            {
+              addressId: '123458',
+              name: 'Kevin',
+              province: '上海市',
+              city: '上海市',
+              area: '浦东新区',
+              address: '沙新镇',
+              phone: '158****0888',
+              postcode: '200120'
+            }
+          ],
+          phone: '',
+          postcode: '',
+          province: '广东省',
+          city: '广州市',
+          area: '天河区'
         },
-        onCancel: () => {
-          this.$Message.info('取消删除');
+        ruleInline: {
+          name: [
+            {required: true, message: '请输入姓名', trigger: 'blur'}
+          ],
+          address: [
+            {required: true, message: '请输入地址', trigger: 'blur'}
+          ],
+          postcode: [
+            {required: true, message: '请输入邮政编码', trigger: 'blur'}
+          ],
+          phone: [
+            {required: true, message: '手机号不能为空', trigger: 'blur'},
+            {type: 'string', pattern: /^1[3|4|5|7|8][0-9]{9}$/, message: '手机号格式出错', trigger: 'blur'}
+          ]
         }
-      });
+      };
+    },
+    created() {
+      this.$store.dispatch("loadAddress");
+    },
+    methods: {
+      edit(index) {
+        this.modal = true;
+        this.formData.province = this.address[index].province;
+        this.formData.city = this.address[index].city;
+        this.formData.area = this.address[index].area;
+        this.formData.address = this.address[index].address;
+        this.formData.name = this.address[index].name;
+        this.formData.phone = this.address[index].phone;
+        this.formData.postcode = this.address[index].postcode;
+      },
+      editAction() {
+        this.modal = false;
+        this.$Message.success('修改成功');
+      },
+      del(index) {
+        this.$Modal.confirm({
+          title: '信息提醒',
+          content: '你确定删除这个收货地址',
+          onOk: () => {
+            this.$Message.success('删除成功');
+          },
+          onCancel: () => {
+            this.$Message.info('取消删除');
+          }
+        });
+      }
+    },
+    components: {
+      Distpicker
     }
-  },
-  components: {
-    Distpicker
-  }
-};
+  };
 </script>
 
 <style scoped>
-.address-box {
-  padding: 15px;
-  margin: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px #ccc;
-}
-.address-header {
-  height: 35px;
-  display: flex;
-  justify-content: space-between;
-  color: #232323;
-  font-size: 18px;
-}
-.address-content {
-  font-size: 14px;
-}
-.address-content-title {
-  color: #999;
-}
-.address-action span{
-  margin-left: 15px;
-  font-size: 14px;
-  color: #2d8cf0;
-  cursor: pointer;
-}
+  .address-box {
+    padding: 15px;
+    margin: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+  }
+
+  .address-header {
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    color: #232323;
+    font-size: 18px;
+  }
+
+  .address-content {
+    font-size: 14px;
+  }
+
+  .address-content-title {
+    color: #999;
+  }
+
+  .address-action span {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #2d8cf0;
+    cursor: pointer;
+  }
 </style>

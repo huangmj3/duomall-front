@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import {register} from "../../network/register";
+  import {registerRequest} from "../../network/user/register";
 
   export default {
     data() {
@@ -146,8 +146,7 @@
         const _this = this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // axios.post('http://huangmj.top/back/user/register', this.ruleForm).then(function (resp)
-            register(this.ruleForm)
+            registerRequest(this.ruleForm)
               .then(resp => {
                 console.log("正在注册")
                 console.log(resp)
