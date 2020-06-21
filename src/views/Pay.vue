@@ -14,7 +14,7 @@
         <div class="pay-qr-scan">
           <img src="../assets/img/pay/pay-qrscan.png">
           <div class="pay-tips">
-            <router-link to="/payDone"><p>点击我, 完成支付</p></router-link>
+            <router-link to="/payDone"><p @click="payDone()">点击我, 完成支付</p></router-link>
           </div>
         </div>
       </div>
@@ -33,6 +33,56 @@
         }, function (result) {
           alert(JSON.stringify(result))
         })
+      },
+      payDone() {
+        console.log("支付成功")
+        this.$store.state.order.order_id = 1529931938150
+        this.$store.state.order.count = this.$store.state.shoppingCart[0].count
+        this.$store.state.order.img = this.$store.state.shoppingCart[0].img
+        this.$store.state.order.package = this.$store.state.shoppingCart[0].package
+        this.$store.state.order.price = this.$store.state.shoppingCart[0].price * this.$store.state.shoppingCart[0].count
+        this.$store.state.order.title = this.$store.state.shoppingCart[0].title
+        // 获取当前日期
+        let date = new Date()
+        // 获取当前月份
+        let nowMonth = date.getMonth() + 1;
+        // 获取当前是几号
+        let strDate = date.getDate()
+        // 添加分隔符“-”
+        let seperator = "-"
+        // 对月份进行处理，1-9月在前面添加一个“0”
+        if (nowMonth >= 1 && nowMonth <= 9) {
+          nowMonth = "0" + nowMonth
+        }
+        // 对月份进行处理，1-9号在前面添加一个“0”
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate
+        }
+        //获取当前小时
+        let nowHour = date.getHours()
+        if (nowHour < 10) {
+          nowHour = "0" + nowHour
+        }
+        //获取当前分钟
+        let nowMinute = date.getMinutes()
+        if (nowMinute < 10) {
+          nowMinute = "0" + nowMinute
+        }
+        //获取当前秒钟
+        let nowSecond = date.getSeconds()
+        if (nowSecond < 10) {
+          nowSecond = "0" + nowSecond
+        }
+        // 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+        let nowDate = date.getFullYear() + seperator + nowMonth + seperator + strDate + " " + nowHour + ":" + nowMinute + ":" + nowSecond;
+        this.$store.state.order.createAt = nowDate
+        console.log("打印时间信息")
+        console.log(nowDate)
+        console.log("打印购物车")
+        console.log(this.$store.state.shoppingCart)
+        console.log("打印订单信息")
+        // console.log(this.$store.state.order)
+        this.$store.state.shoppingCart = []
       }
     }
   };

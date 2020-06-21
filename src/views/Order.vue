@@ -28,7 +28,7 @@
               <p slot="content">
                 <RadioGroup vertical size="large" @on-change="changeAddress">
                   <Radio :label="item.addressId" v-for="(item, index) in address" :key="index">
-                    <span>{{item.name}} {{item.province}} {{item.city}} {{item.address}} {{item.phone}} {{item.postalcode}}</span>
+                    <span>{{item.name}} {{item.province}} {{item.city}} {{item.address}} {{item.phone}} {{item.postcode}}</span>
                   </Radio>
                 </RadioGroup>
               </p>
@@ -81,7 +81,7 @@
       //         _this.pageSize = resp.data.pageSize
       //         _this.total = resp.data.total
       //     })
-      this.$store.dispatch('loadAddress')
+      // this.$store.dispatch('loadAddress')
     },
     data() {
       return {
@@ -139,7 +139,16 @@
       };
     },
     computed: {
-      ...mapState(['address', 'shoppingCart']),
+      address(){
+        console.log("打印一下用户地址")
+        console.log(this.$store.state)
+        console.log(this.$store.state.address)
+        return this.$store.state.address
+      },
+      // ...mapState([ 'shoppingCart']),
+      shoppingCart(){
+        return this.$store.state.shoppingCart
+      },
       totalPrice() {
         let price = 0;
         this.goodsCheckList.forEach(item => {
@@ -158,7 +167,7 @@
         this.address.forEach(item => {
           if (item.addressId === data) {
             father.checkAddress.name = item.name;
-            father.checkAddress.address = `${item.name} ${item.province} ${item.city} ${item.address} ${item.phone} ${item.postalcode}`;
+            father.checkAddress.address = `${item.name} ${item.province} ${item.city} ${item.address} ${item.phone} ${item.postcode}`;
           }
         });
       }

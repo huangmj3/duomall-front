@@ -14,11 +14,16 @@ export default {
   UPDATE_USER_LOGIN_INFO(state, userInfo) {
     console.log("正在更新用户信息")
     if (userInfo === '') {
+      state.userInfo.userId = ''
       state.userInfo.name = ''
       state.userInfo.token = ''
     } else {
+      console.log("登录成功，展示一下")
+      console.log(state.userInfo)
+      state.userInfo.userId = userInfo.userId
       state.userInfo.name = userInfo.name
       state.userInfo.token = userInfo.token
+      console.log(state)
     }
     console.log("用户信息更新完成")
   },
@@ -105,16 +110,16 @@ export default {
 
   // 添加购物车
   ADD_SHOPPING_CART(state, data) {
-    const item = {
-      goods_id: data.goods_id,
-      count: data.count,
-      img: data.package.img,
-      package: data.package.intro,
-      price: data.package.price,
-      title: data.title
-    };
-    state.shoppingCart.push(item);
-    state.newShoppingCart = data;
+    // const item = {
+    //   goods_id: data.goods_id,
+    //   count: data.count,
+    //   img: data.package.img,
+    //   package: data.package.intro,
+    //   price: data.package.price,
+    //   title: data.title
+    // };
+    // state.shoppingCart.push(item);
+    // state.newShoppingCart = data;
   },
 
   // 设置购物车信息

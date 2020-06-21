@@ -11,7 +11,7 @@
           <el-input placeholder="请输入手机号" prefix-icon="el-icon-user" v-model="ruleForm.cellphone"></el-input>
         </el-form-item>
         <el-form-item prop="loginPassword">
-          <el-input placeholder="请输入密码" prefix-icon="el-icon-lock"
+          <el-input placeholder="请输入密码" type="password" prefix-icon="el-icon-lock"
                     v-model="ruleForm.loginPassword"></el-input>
         </el-form-item>
         <el-form-item class="btns">
@@ -35,8 +35,8 @@
     data() {
       return {
         ruleForm: {
-          cellphone: '3',
-          loginPassword: '3'
+          cellphone: '',
+          loginPassword: ''
         },
         rules: {
           cellphone: [

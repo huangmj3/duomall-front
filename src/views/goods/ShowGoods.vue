@@ -153,17 +153,22 @@
         this.imgIndex = index;
       },
       addShoppingCartBtn() {
-        const index1 = parseInt(this.selectBoxIndex / 3);
-        const index2 = this.selectBoxIndex % 3;
-        const date = new Date();
-        const goodsId = date.getTime();
+        console.log(this.$store.state.userInfo)
+        console.log("正在进行添加购物车操作")
+        // const index1 = parseInt(this.selectBoxIndex / 3);
+        // const index2 = this.selectBoxIndex % 3;
+        // const date = new Date();
+        // const goodsId = date.getTime();
         const data = {
-          goods_id: goodsId,
-          title: this.goodsInfo.title,
+          goods_id: 1529931938150,
           count: this.count,
-          package: this.goodsInfo.setMeal[index1][index2]
+          img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/1.jpg',
+          package: '4.7英寸-深邃蓝',
+          price: this.price * this.count,
+          title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳'
         };
-        this.$store.dispatch('addShoppingCart',data);
+        // this.$store.dispatch('addShoppingCart',data);
+        this.$store.state.shoppingCart.push(data)
         this.$router.push('/shoppingCart');
       }
     },

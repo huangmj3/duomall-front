@@ -25,7 +25,11 @@ export default {
         if (resp.success) {
           //账号密码正确，登录成功
           console.log("喂，我成功了啊")
-          const userInfo = {name: resp.data.name, token: resp.data.token}
+          const userInfo = {
+            userId: resp.data.userId,
+            name: resp.data.name,
+            token: resp.data.token
+          }
           context.commit('UPDATE_USER_LOGIN_INFO', userInfo);
         } else {
           //账号不存在或密码错误，登录失败
@@ -104,7 +108,7 @@ export default {
         console.log(resp)
       })
     // let computer = searchGoodsByTypeRequest();
-   searchGoodsByTypeRequest("数码")
+    searchGoodsByTypeRequest("数码")
       .then(resp => {
         console.log("已经拿到数码数据，下面做一下展示")
         console.log(resp)
@@ -646,7 +650,7 @@ export default {
   // 添加购物车
   addShoppingCart(context) {
     return new Promise((resolve, reject) => {
-      context.commit('ADD_SHOPPING_CART', data);
+      // context.commit('ADD_SHOPPING_CART', data);
     });
   }
   ,

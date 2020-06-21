@@ -24,6 +24,7 @@ const state = {
     remarks: []
   },
   userInfo: { // 用户信息
+    userId: 1262764905694003200,
     name: '',
     token: ''
   },
@@ -185,16 +186,41 @@ const state = {
   shoppingCart: [], // 购物车
   newShoppingCart: [], // 刚加入的购物车，作为展示
   recommend: [], // 推荐购买
-  order: [{
-    order_id: 1529931938150,
-    goods_id: 1529931938150,
-    count: 1,
-    img: 'img/goodsDetail/pack/hot1.jpg',
-    package: '4.7英寸-深邃蓝',
-    price: 28,
-    title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳',
-    createAt: '2018-06-06 20:06:08'
-  }]
+  order: [
+    // {
+    // order_id: 1529931938150,
+    // goods_id: 1529931938150,
+    // count: 1,
+    // img: 'https://duomall-goods-img.oss-cn-beijing.aliyuncs.com/all/1.jpg',
+    // package: '4.7英寸-深邃蓝',
+    // price: 28,
+    // title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳',
+    // createAt: '2018-06-06 20:06:08'
+  // }
+  ],
+    address: [
+      {
+        addressId: '123456',
+        name: 'Gavin',
+        province: '广东省',
+        city: '广州市',
+        area: '天河区',
+        address: '燕岭路633号',
+        phone: '15229300609',
+        postcode: '510000'
+      },
+      {
+        addressId: '123458',
+        name: 'Kevin',
+        province: '上海市',
+        city: '上海市',
+        area: '浦东新区',
+        address: '沙新镇',
+        phone: '15898940888',
+        postcode: '200120'
+      }
+    ],
+
 }
 
 export default new Vuex.Store({

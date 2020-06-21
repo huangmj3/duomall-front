@@ -18,25 +18,32 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="用户名称" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+          <el-input v-model="ruleForm.name" auto-complete="off" placeholder="用户名称"></el-input>
         </el-form-item>
         <el-form-item label="用户密码" prop="loginPassword">
-          <el-input type="password" v-model="ruleForm.loginPassword" autocomplete="off"></el-input>
+          <el-input type="password" v-model="ruleForm.loginPassword" auto-complete="new-password"
+                    placeholder="用户密码"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="rePass">
-          <el-input type="password" v-model="ruleForm.rePass" autocomplete="off"></el-input>
+          <el-input type="password" v-model="ruleForm.rePass" autocomplete="" placeholder="确认密码"></el-input>
         </el-form-item>
-        <el-form-item label="用户性别" prop="sex">
+        <el-form-item label="用户性别" prop="sex" placeholder="用户性别">
           <el-radio v-model="ruleForm.sex" label="1">男</el-radio>
           <el-radio v-model="ruleForm.sex" label="2">女</el-radio>
         </el-form-item>
-        <el-form-item label="用户生日" prop="birthday">
+        <el-form-item label="用户生日" prop="birthday" placeholder="用户生日">
           <el-date-picker v-model="ruleForm.birthday" type="date" placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
-
-        <el-form-item label="用户手机" prop="cellphone">
+        <el-form-item label="用户手机" prop="cellphone" placeholder="用户手机">
           <el-input v-model="ruleForm.cellphone"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="captcha" placeholder="验证码" class="captcha" text-></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="sendMsg" class="captcha-btn" :disabled="isDisabled">{{buttonName}}
+          </el-button>
         </el-form-item>
         <el-form-item class="btns">
           <el-button type="primary" @click="register('ruleForm')">注册</el-button>
@@ -54,6 +61,7 @@
 
 <script>
   import {registerRequest} from "../../network/user/register";
+  import {sendCaptchaRequest} from "../../network/user/sendCaptchaRequest"
 
   export default {
     data() {
@@ -86,13 +94,19 @@
         })
       };
       return {
+        userId: 1111,
+        buttonName: "发送短信",
+        isDisabled: false,
+        time: 60,
+        captcha: '',
+        registerButtonType: 'primary',
         ruleForm: {
-          name: '111111',
-          loginPassword: '111111',
-          rePass: '111111',
-          sex: '1',
-          birth: '=2020-04-22T16:00:00.000Z',
-          cellphone: '111111111'
+          name: '',
+          loginPassword: '',
+          rePass: '',
+          sex: '',
+          birth: '',
+          cellphone: ''
         },
         fileList: [],
         imageUrl: '',
@@ -122,7 +136,6 @@
             // { validator: validateTele, trigger: 'blur' }
           ]
         },
-
       }
     },
     methods: {
@@ -152,15 +165,15 @@
                 console.log(resp)
                 console.log(this)
                 console.log(resp.success)
-                if (resp.success) {
-                  console.log("注册成功")
-                  _this.$alert('用户' + _this.ruleForm.name + '注册成功！', '消息', {
-                    confirmButtonText: '确定',
-                    callback: () => {
-                      _this.$router.push('/login')
-                    }
-                  })
-                }
+                // if (resp.success) {
+                console.log("注册成功")
+                _this.$alert('用户' + _this.ruleForm.name + '注册成功！', '消息', {
+                  confirmButtonText: '确定',
+                  callback: () => {
+                    _this.$router.push('/login')
+                  }
+                })
+                // }
               })
           } else {
             return false;
@@ -169,6 +182,24 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      sendMsg() {
+        sendCaptchaRequest(this.userId, this.ruleForm.cellphone)
+          .then(resp => {
+            this.captcha = resp.data.captcha
+          })
+        let me = this;
+        me.isDisabled = true;
+        let interval = window.setInterval(function () {
+          me.buttonName = '（' + me.time + '秒）后重新发送';
+          --me.time;
+          if (me.time < 0) {
+            me.buttonName = "重新发送";
+            me.time = 10;
+            me.isDisabled = false;
+            window.clearInterval(interval);
+          }
+        }, 1000);
       }
     }
   }
@@ -177,17 +208,17 @@
 <style scoped>
   .regist-container {
     background-color: #2b4b6b;
-    height: 100%;
+    height: 110%;
   }
 
   .regist_box {
     width: 450px;
-    height: 540px;
+    height: 620px;
     background-color: #fff;
     border-radius: 3px;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 54%;
     transform: translate(-50%, -44%);
   }
 
@@ -234,13 +265,32 @@
     background-color: #eee;
   }
 
+  .captcha {
+    width: 45%;
+    float: left;
+    left: -35%;
+    margin-right: 15px;
+    margin-top: 5%;
+  }
+
+  .captcha.placeholder {
+    text-align: center;
+  }
+
+  .captcha-btn {
+    float: right;
+    width: 80%;
+    left: -10%;
+    margin-top: -28%;
+  }
+
   .btns {
-    margin-left: 5%;
+    margin-left: 0%;
   }
 
   .login {
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     right: 15px;
   }
 </style>
